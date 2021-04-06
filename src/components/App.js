@@ -34,6 +34,9 @@ function App() {
         </ul>
       </div>
       <Switch>
+        <Route exact path="/home">
+          {/* <Home /> */}
+        </Route>
       </Switch>
     </div>
   );
