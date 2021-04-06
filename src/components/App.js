@@ -1,7 +1,8 @@
 import { Switch, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentUser } from './redux/userSlice.js'
+import { setCurrentUser } from '../redux/userSlice.js'
+import NavBar from './NavBar.js'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div>
+      <NavBar />
       <div>
         <h1>This is the app component</h1>
         <ul>
