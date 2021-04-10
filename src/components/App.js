@@ -1,41 +1,32 @@
 import { Switch, Route } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentUser } from '../redux/userSlice.js'
-import NavBar from './NavBar.js'
+import { useState } from 'react'
+import NavBar from './NavBar'
+import Login from './Login'
+import Signup from './Signup'
+import Profile from './Profile'
 
 
 function App() {
 
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser)
-  console.log(currentUser)
+  const [user, setUser] = useState(null)
 
-  // fetch users --> there is only one user right now
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-    .then(res => res.json())
-    .then(data => {
-      const action = setCurrentUser(data)
-      dispatch(action)
-    })
-  }, [dispatch]);
-
+  function userLogout() {
+    setUser(null)
+  }
 
   return (
     <div>
-      <NavBar />
-      <div>
-        <h1>This is the app component</h1>
-        <ul>
-          <li>Start with NavBar for easy navigation</li>
-          <li>Set up components on the go</li>
-          <li>styling technologies, home page, signup/sign in</li>
-        </ul>
-      </div>
+      <NavBar user={user} userLogout={userLogout} />
+      <h1>This is the app component</h1>
       <Switch>
-        <Route exact path="/home">
-          {/* <Home /> */}
+        <Route exact path="/login">
+          <Login setUser={setUser}/>
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
         </Route>
       </Switch>
     </div>
