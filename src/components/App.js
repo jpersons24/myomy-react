@@ -15,11 +15,11 @@ function App() {
 
   useEffect(() => {
     // GET /me request
-    // fetch('http://localhost:4000/me')
-    //   .then(res => res.json())
-    //   .then(user => {
-    //     setUser(user)
-    //   })
+    fetch('http://localhost:4000/me')
+      .then(res => res.json())
+      .then(user => {
+        setUser(user)
+      })
   }, [])
 
   function userLogout() {
