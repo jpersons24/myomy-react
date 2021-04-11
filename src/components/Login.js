@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 function Login({ setUser }) {
+
+   const history = useHistory()
 
    const [formData, setFormData] = useState({
       username: "",
@@ -25,6 +28,7 @@ function Login({ setUser }) {
             console.log(user)
             setUser(user)
          })
+      history.push("/home")
    }
 
    return(

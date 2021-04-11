@@ -16,6 +16,8 @@ function NavBar({ user, userLogout }) {
             }
          </div>
          <div>
+            <Link to="/home">Home</Link>
+            <br></br>
             <Link to="/profile">Profile</Link>
          </div>
       </header>
