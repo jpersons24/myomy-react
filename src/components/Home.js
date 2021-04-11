@@ -76,6 +76,7 @@ function Home({ user }) {
                <input type="submit" />
             </form>
          </div>
+         <p>On form sumbit, new workout needs to be added to workout list for display!</p>
          <WorkoutLog user={user}/>
       </div>
    )
