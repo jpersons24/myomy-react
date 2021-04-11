@@ -1,14 +1,17 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addWorkout } from '../redux/workoutSlice'
 import WorkoutLog from "./WorkoutLog";
 
 function Home({ user }) {
+
+   const dispatch = useDispatch()
    
    const [formData, setFormData] = useState({
       date: "",
       duration: "",
       workoutType: "",
    })
-   
 
    function handleInput(e) {
       // console.log((e.target.value))
@@ -36,6 +39,13 @@ function Home({ user }) {
          },
          body: JSON.stringify(newWorkout)
       })
+      .then(res => res.json())
+      .then(workout => {
+         const action = addWorkout(workout)
+         dispatch(action)
+      })
+
+      // reset form fields
       setFormData({
          date: "",
          duration: "",
@@ -46,6 +56,7 @@ function Home({ user }) {
    return (
       <div>
          <h1>Welcome, {user.username}!</h1>
+         <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px"}} />
          <div>
             <h4>What did you do today?</h4>
             <form onSubmit={handleSubmit}>
@@ -77,7 +88,7 @@ function Home({ user }) {
             </form>
          </div>
          <p>On form sumbit, new workout needs to be added to workout list for display!</p>
-         <WorkoutLog user={user}/>
+         <WorkoutLog user={user} />
       </div>
    )
 }

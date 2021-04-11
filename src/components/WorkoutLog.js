@@ -1,12 +1,22 @@
+import { useSelector } from 'react-redux'
+
 function WorkoutLog({ user }) {
 
-   console.log(user.workouts)
+   // get workouts from redux store
+   let workouts = useSelector((state) => state.workout.workouts)
 
-   user.workouts.sort(function(a, b) {
+   // filtering through workouts for current user's workouts
+   const userWorkouts = workouts.filter((workout) => {
+      return workout.user_id === user.id
+   })
+
+   // sort userWorkouts by date
+   let sorted_workouts = userWorkouts.sort(function(a, b) {
       return new Date(a.date) - new Date(b.date)
    })
 
-   const workout_components = user.workouts.map((workout) => {
+   // mapping through sorted_workouts for display components
+   const workout_components = sorted_workouts.map((workout) => {
       return (
          <div key={workout.id}>
             <ul style={{listStyleType: 'none'}}>
@@ -20,7 +30,7 @@ function WorkoutLog({ user }) {
 
    return (
       <div>
-         <h3>Previous Workouts</h3>
+         <h2>{user.username}'s Workouts (from this month) - eventually filter through workouts from current month only</h2>
          {workout_components}
       </div>
    )
