@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NavBar from './NavBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -9,6 +9,15 @@ import Profile from './Profile'
 function App() {
 
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    // GET /me request
+    fetch('http://localhost:4000/me')
+      .then(res => res.json())
+      .then(user => {
+        setUser(user)
+      })
+  }, [])
 
   function userLogout() {
     setUser(null)
@@ -26,7 +35,7 @@ function App() {
           <Signup />
         </Route>
         <Route exact path="/profile">
-          <Profile />
+          {user ? <Profile user={user} setUser={setUser} /> : "You must log in to see this page!"}
         </Route>
       </Switch>
     </div>
