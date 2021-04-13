@@ -2,6 +2,7 @@ import { Switch, Route, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setWorkouts } from '../redux/workoutSlice'
+import { setExercises } from '../redux/exerciseSlice'
 import NavBar from './NavBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -22,8 +23,9 @@ function App() {
       .then(res => res.json())
       .then(user => {
         setUser(user)
+        history.push("/home")
       })
-  }, [])
+  }, [history])
 
   useEffect(() => {
     // GET /workouts
@@ -31,6 +33,16 @@ function App() {
     .then(res => res.json())
     .then(workouts => {
       const action = setWorkouts(workouts)
+      dispatch(action)
+    })
+  }, [dispatch])
+
+  useEffect(() => {
+    // GET /exercises
+    fetch('http://localhost:4000/exercises')
+    .then(res => res.json())
+    .then(exercises => {
+      const action = setExercises(exercises)
       dispatch(action)
     })
   }, [dispatch])

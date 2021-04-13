@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import ExerciseLog from './ExerciseLog'
 
 function WorkoutLog({ user }) {
 
@@ -24,6 +25,7 @@ function WorkoutLog({ user }) {
                <li>Duration: {workout.duration} minutes</li>
                <li>Workout Style: {workout.workout_type}</li>
             </ul>
+            <ExerciseLog workout={workout} />
          </div>
       )
    })
