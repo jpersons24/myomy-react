@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components'
 import { addWorkout } from '../redux/workoutSlice'
 import WorkoutLog from "./WorkoutLog";
 
@@ -54,10 +55,12 @@ function Home({ user }) {
    }
    
    return (
-      <div>
-         <h1>Welcome, {user.username}!</h1>
-         <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px"}} />
-         <div>
+      <Wrapper>
+         <Welcome>
+            <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px", marginRight: "10px"}} />
+            <h2>Welcome, {user.username}!</h2>
+         </Welcome>
+         <FormContainer>
             <h4>What did you do today?</h4>
             <form onSubmit={handleSubmit}>
                <label>Date: </label>
@@ -83,14 +86,32 @@ function Home({ user }) {
                   value={formData.workoutType}
                   onChange={handleInput} 
                />
-               <br></br>
                <input type="submit" />
             </form>
-         </div>
-         <p>On form sumbit, new workout needs to be added to workout list for display!</p>
+         </FormContainer>
+         
          <WorkoutLog user={user} />
-      </div>
+      </Wrapper>
    )
 }
 
 export default Home;
+
+const Wrapper = styled.div`
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   padding: 20px;
+`
+
+const Welcome = styled.div`
+   display: flex;
+   flex-flow: flex-start wrap;
+   align-items: center;
+`
+
+const FormContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+`

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setWorkouts } from '../redux/workoutSlice'
 import { setExercises } from '../redux/exerciseSlice'
+import styled from 'styled-components'
 import NavBar from './NavBar'
 import Login from './Login'
 import Signup from './Signup'
@@ -55,7 +56,7 @@ function App() {
   return (
     <div>
       <NavBar user={user} userLogout={userLogout} />
-      <h1>This is the app component</h1>
+      <Header>MYOMY</Header>
       <Switch>
         <Route exact path="/login">
           <Login setUser={setUser}/>
@@ -75,3 +76,8 @@ function App() {
 }
 
 export default App;
+
+const Header = styled.h1`
+  display: flex;
+  justify-content: center;
+`

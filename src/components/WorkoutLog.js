@@ -24,15 +24,18 @@ function WorkoutLog({ user }) {
                <li>Date: {workout.date}</li>
                <li>Duration: {workout.duration} minutes</li>
                <li>Workout Style: {workout.workout_type}</li>
+               <li><ExerciseLog workout={workout} /></li>
             </ul>
-            <ExerciseLog workout={workout} />
          </div>
       )
    })
 
    return (
       <div>
-         <h2>{user.username}'s Workouts (from this month) - eventually filter through workouts from current month only</h2>
+         <h2>{user.username}'s Workouts (from this month)</h2>
+         <p>Add filter feature that display only workouts from current month.</p>
+         <p>OR</p>
+         <p>Carousel / Accordion / another feature to dislplay firs x amount of workouts</p>
          {workout_components}
       </div>
    )
