@@ -9,9 +9,15 @@ const workoutSlice = createSlice({
       },
       addWorkout(state, action) {
          state.workouts.push(action.payload)
+      },
+      removeWorkout(state, action) {
+         const filteredWorkouts = state.workouts.filter((workout) => {
+            return workout.id !== action.payload.id
+         })
+         state.workouts = filteredWorkouts
       }
    }
 });
 
-export const { setWorkouts, addWorkout } = workoutSlice.actions;
+export const { setWorkouts, addWorkout, removeWorkout } = workoutSlice.actions;
 export default workoutSlice.reducer;
