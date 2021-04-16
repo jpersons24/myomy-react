@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import Table from 'react-bootstrap/Table'
 
 
 function ExerciseShow({ workout }) {
@@ -10,24 +11,32 @@ function ExerciseShow({ workout }) {
    
    // map through filtered exercises
    const exerciseComponents = filteredExercises.map((exercise) => {
+
       return (
-         <div key={exercise.id}>
-            <ul style={{listStyle: "none"}}>
-               <li>{exercise.name}</li>
-               <li>
-                  <ul>
-                     <li>Sets: {exercise.sets}</li>
-                     <li>Sets: {exercise.repetitions}</li>
-                  </ul>
-               </li>
-            </ul>
-         </div>
+         <>
+            <tbody key={exercise.id}>
+               <tr>
+                  <td>{exercise.name}</td>
+                  <td>{exercise.sets}</td>
+                  <td>{exercise.repetitions}</td>
+               </tr>
+            </tbody>
+         </>
       )
    });
 
    return(
       <div>
-         {exerciseComponents}
+         <Table striped bordered variant="dark" size="sm">
+            <thead>
+               <tr>
+                  <th>Exercise</th>
+                  <th>Sets</th>
+                  <th>Repetitions</th>
+               </tr>
+            </thead>
+            {exerciseComponents}     
+         </Table>
       </div>
    )
 };

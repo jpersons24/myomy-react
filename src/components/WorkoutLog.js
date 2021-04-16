@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import ExerciseLog from './ExerciseLog';
 import { removeWorkout } from '../redux/workoutSlice';
+import Table from 'react-bootstrap/Table'
 
 function WorkoutLog({ user }) {
 
@@ -14,8 +15,7 @@ function WorkoutLog({ user }) {
       console.log(e.target)
       console.log(workout)
 
-      // use dispatch to:
-      // call remove workout action from workout Redux state
+      // remove workout object from state
       const action = removeWorkout(workout)
       dispatch(action)
 
@@ -38,29 +38,36 @@ function WorkoutLog({ user }) {
    // mapping through sorted_workouts for display components
    const workout_components = sorted_workouts.map((workout) => {
 
-      // let workout_id = workout.id
-      // console.log(workout_id)
-
       return (
-         <WorkoutWrapper key={workout.id}>
-            <ul style={{listStyleType: 'none'}}>
-               <li>Date: {workout.date}</li>
-               <li>Duration: {workout.duration} minutes</li>
-               <li>Workout Style: {workout.workout_type}</li>
-               <li><button onClick={(e) => handleClick(e, workout)}>Remove Workout</button></li>
-               <li><ExerciseLog workout={workout} /></li>
-            </ul>
-         </WorkoutWrapper>
+         <>
+            <tbody key={workout.id}>
+               <tr>
+                  <td>{workout.date}</td>
+                  <td>{workout.workout_type}</td>
+                  <td>{workout.duration}</td>
+               </tr>
+            </tbody>
+            <button onClick={(e) => handleClick(e, workout)}>Remove Workout</button>
+            <ExerciseLog workout={workout} />
+         </>
       )
    })
 
    return (
       <div>
-         <h2>{user.username}'s Workouts (from this month)</h2>
+         <h2>{user.username}'s Workouts</h2>
          <p>Add filter feature that display only workouts from current month.</p>
-         <p>OR</p>
-         <p>Carousel / Accordion / another feature to dislplay firs x amount of workouts</p>
-         {workout_components}
+         {/* {workout_components} */}
+         <Table striped bordered size="lg">
+            <thead>
+               <tr>
+                  <th>Date</th>
+                  <th>Workout Type</th>
+                  <th>Duration (minutes)</th>
+               </tr>
+            </thead>
+            {workout_components}
+         </Table>
       </div>
    )
 }

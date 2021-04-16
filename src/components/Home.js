@@ -1,18 +1,20 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
-import { addWorkout } from '../redux/workoutSlice'
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { addWorkout } from '../redux/workoutSlice';
 import WorkoutLog from "./WorkoutLog";
+import MealLog from './MealLog';
 
 function Home({ user }) {
 
    const dispatch = useDispatch()
-   
    const [formData, setFormData] = useState({
       date: "",
       duration: "",
       workoutType: "",
    })
+   const [showWorkouts, setShowWorkouts] = useState(false)
+   const [showMeals, setShowMeals] = useState(false)
 
    function handleInput(e) {
       // console.log((e.target.value))
@@ -53,14 +55,22 @@ function Home({ user }) {
          workoutType: "",
       })
    }
+
+   function handleWorkoutClick(e) {
+      setShowWorkouts((showWorkouts) => !showWorkouts)
+   }
+
+   function handleMealsClick(e) {
+      setShowMeals((showMeals) => !showMeals)
+   }
    
    return (
       <Wrapper>
-         <Welcome>
-            <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px", marginRight: "10px"}} />
-            <h2>Welcome, {user.username}!</h2>
-         </Welcome>
-         <FormContainer>
+         <Container>
+            <Welcome>
+               <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px", marginRight: "10px"}} />
+               <h2>Welcome, {user.username}!</h2>
+            </Welcome>
             <h4>What did you do today?</h4>
             <form onSubmit={handleSubmit}>
                <label>Date: </label>
@@ -82,15 +92,30 @@ function Home({ user }) {
                <input
                   type="input"
                   name="workoutType"
-                  placeholder="cardio, weights, intervals..."
+                  placeholder="cardio, weights..."
                   value={formData.workoutType}
                   onChange={handleInput} 
                />
                <input type="submit" />
             </form>
-         </FormContainer>
+            <h4>What did you eat today?</h4>
+            <div>
+               <button style={{width: "200px"}} onClick={handleWorkoutClick}>
+                  {!showWorkouts ? 'See your workouts' : 'Hide your workouts'}
+               </button>
+               <button style={{width: "200px"}} onClick={handleMealsClick}>
+                  {!showMeals ? 'See your meals' : 'Hide your meals'}
+               </button>
+            </div>
+         </Container>
+         <br></br>
+         <br></br>
+         <br></br>
          
-         <WorkoutLog user={user} />
+         {!showWorkouts ? null :
+         <WorkoutLog user={user} />}
+         {!showMeals ? null :
+         <MealLog user={user} />}
       </Wrapper>
    )
 }
@@ -108,9 +133,10 @@ const Welcome = styled.div`
    display: flex;
    flex-flow: flex-start wrap;
    align-items: center;
+   margin: 40px;
 `
 
-const FormContainer = styled.div`
+const Container = styled.div`
    display: flex;
    flex-direction: column;
    align-items: center;

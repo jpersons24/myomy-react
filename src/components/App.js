@@ -1,14 +1,15 @@
 import { Switch, Route, useHistory } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { setWorkouts } from '../redux/workoutSlice'
-import { setExercises } from '../redux/exerciseSlice'
-import styled from 'styled-components'
-import NavBar from './NavBar'
-import Login from './Login'
-import Signup from './Signup'
-import Profile from './Profile'
-import Home from './Home'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setWorkouts } from '../redux/workoutSlice';
+import { setExercises } from '../redux/exerciseSlice';
+import { setMeals } from '../redux/mealSlice';
+import styled from 'styled-components';
+import NavBar from './NavBar';
+import Login from './Login';
+import Signup from './Signup';
+import Profile from './Profile';
+import Home from './Home';
 
 
 function App() {
@@ -44,6 +45,16 @@ function App() {
     .then(res => res.json())
     .then(exercises => {
       const action = setExercises(exercises)
+      dispatch(action)
+    })
+  }, [dispatch])
+
+  useEffect(() => {
+    // GET /meals
+    fetch('http://localhost:4000/meals')
+    .then(res => res.json())
+    .then(meals => {
+      const action = setMeals(meals)
       dispatch(action)
     })
   }, [dispatch])
