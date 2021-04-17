@@ -7,11 +7,6 @@ import MealForm from './MealForm';
 
 function Home({ user }) {
 
-   // const [mealFormData, setMealFormData] = useState({
-   //    date: "",
-   //    name: "",
-   //    description: "",
-   // })
    const [showWorkouts, setShowWorkouts] = useState(false)
    const [showMeals, setShowMeals] = useState(false)
 

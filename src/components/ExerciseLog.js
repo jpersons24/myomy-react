@@ -61,32 +61,32 @@ function ExerciseLog({ workout }) {
       <div>
          {show ? 
          <>
-         <button onClick={handleClick}>Hide Exercises</button>
-         <form onSubmit={handleSubmit}>
-            <label>Exercise Name: </label>
-            <input
-               type="input"
-               name="name"
-               value={formData.name}
-               onChange={handleChange}
-            />
-            <label># of Sets: </label>
-            <input 
-               type="number"
-               name="sets"
-               value={formData.sets}
-               onChange={handleChange}
-            />
-            <label># of Reps per Set: </label>
-            <input
-               type="number"
-               name="repetitions"
-               value={formData.repetitions}
-               onChange={handleChange} 
-            />
-            <input type="submit" value="Add Exercise"/>
-         </form>
-         <ExerciseShow workout={workout} />
+            <button onClick={handleClick}>Hide Exercises</button>
+            <form onSubmit={handleSubmit}>
+               <label>Exercise Name: </label>
+               <input
+                  type="input"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+               />
+               <label># of Sets: </label>
+               <input 
+                  type="number"
+                  name="sets"
+                  value={formData.sets}
+                  onChange={handleChange}
+               />
+               <label># of Reps per Set: </label>
+               <input
+                  type="number"
+                  name="repetitions"
+                  value={formData.repetitions}
+                  onChange={handleChange} 
+               />
+               <input type="submit" value="Add Exercise"/>
+            </form>
+            <ExerciseShow workout={workout} />
          </>
          :
          <button onClick={handleClick}>Show Exercises</button>

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import ExerciseLog from './ExerciseLog';
 import { removeWorkout } from '../redux/workoutSlice';
 import Table from 'react-bootstrap/Table'
@@ -70,12 +70,12 @@ function WorkoutLog({ user }) {
          </Table>
       </div>
    )
-}
+};
 
-export default WorkoutLog
+export default WorkoutLog;
 
-const WorkoutWrapper = styled.div`
-   margin: 50px;
-   justify-content: space-between;
-`
+// const WorkoutWrapper = styled.div`
+//    margin: 50px;
+//    justify-content: space-between;
+// `
 

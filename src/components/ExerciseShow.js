@@ -11,7 +11,6 @@ function ExerciseShow({ workout }) {
    
    // map through filtered exercises
    const exerciseComponents = filteredExercises.map((exercise) => {
-
       return (
          <>
             <tbody key={exercise.id}>

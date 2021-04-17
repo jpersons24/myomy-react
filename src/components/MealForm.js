@@ -1,8 +1,10 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addMeal } from '../redux/mealSlice';
 
 function MealForm({ user }) {
 
+   const dispatch = useDispatch()
    const [formData, setFormData] = useState({
       date: "",
       name: "",
@@ -17,9 +19,28 @@ function MealForm({ user }) {
    function handleSubmit(e) {
       e.preventDefault()
 
-      // /POST /meals
-      // addMeal using dispatch
+      const newMeal = {
+         date: formData.date,
+         name: formData.name, 
+         description: formData.description,
+         user_id: user.id,
+      }
 
+      // /POST /meals
+      fetch('http://localhost:4000/meals', {
+         method: 'POST',
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newMeal)
+      })
+      .then(res => res.json())
+      .then(meal => {
+         const action = addMeal(meal)
+         console.log(action)
+         dispatch(action)
+      })
+      
       setFormData({
          date: "",
          name: "",
@@ -38,14 +59,14 @@ function MealForm({ user }) {
                value={formData.date}
                onInput={handleInput} 
             />
-            <label>Food Group: </label>
+            <label>Meal: </label>
             <input
                type="input"
                name="name"
                value={formData.name}
                onChange={handleInput} 
             />
-            <label>Nutirient Type: </label>
+            <label>Description: </label>
             <input
                type="input"
                name="description"

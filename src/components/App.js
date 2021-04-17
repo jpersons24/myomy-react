@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setWorkouts } from '../redux/workoutSlice';
 import { setExercises } from '../redux/exerciseSlice';
 import { setMeals } from '../redux/mealSlice';
+import { setFoods } from '../redux/foodSlice';
 import styled from 'styled-components';
 import NavBar from './NavBar';
 import Login from './Login';
@@ -55,6 +56,15 @@ function App() {
     .then(res => res.json())
     .then(meals => {
       const action = setMeals(meals)
+      dispatch(action)
+    })
+  }, [dispatch])
+
+  useEffect(() => {
+    fetch("http://localhost:4000/foods")
+    .then(res => res.json())
+    .then(foods => {
+      const action = setFoods(foods)
       dispatch(action)
     })
   }, [dispatch])
