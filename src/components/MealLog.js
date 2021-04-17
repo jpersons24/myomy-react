@@ -18,7 +18,6 @@ function MealLog({ user }) {
                   <th>Description</th>
                </tr>
             </thead>
-            
          </Table>
       </>
    )
