@@ -30,9 +30,23 @@ function NavBar({ user, userLogout }) {
             :
             (
                <>
-                  <Link to="/login">Login</Link>
+                  <Link 
+                     to="/login"
+                     style={{
+                        marginRight: "10px",
+                     }}
+                  >
+                     Login
+                  </Link>
                   <br></br>
-                  <Link to="/signup">Signup</Link>
+                  <Link 
+                     to="/signup"
+                     style={{
+                        marginRight: "10px",
+                     }}
+                  >
+                     Signup
+                  </Link>
                </>
             )
             }

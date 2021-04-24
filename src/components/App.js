@@ -19,16 +19,17 @@ function App() {
   const dispatch = useDispatch()
 
   const [user, setUser] = useState(null)
+  console.log("Current User", user)
 
-  useEffect(() => {
-    // GET /me request
-    fetch('http://localhost:4000/me')
-      .then(res => res.json())
-      .then(user => {
-        setUser(user)
-        history.push("/home")
-      })
-  }, [history])
+  // useEffect(() => {
+  //   // GET /me
+  //   fetch('http://localhost:4000/me')
+  //     .then(res => res.json())
+  //     .then(user => {
+  //       setUser(user)
+  //       history.push("/home")
+  //     })
+  // }, [history])
 
   useEffect(() => {
     // GET /workouts
@@ -83,7 +84,7 @@ function App() {
           <Login setUser={setUser}/>
         </Route>
         <Route exact path="/signup">
-          <Signup />
+          <Signup setUser={setUser} />
         </Route>
         <Route exact path="/profile">
           {user ? <Profile user={user} setUser={setUser} /> : "You must log in to see this page!"}

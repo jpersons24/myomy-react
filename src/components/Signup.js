@@ -1,6 +1,11 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
-function Signup() {
+
+function Signup({ setUser }) {
+
+   const history = useHistory();
 
    const [formData, setFormData] = useState({
       username: "",
@@ -24,18 +29,17 @@ function Signup() {
       .then(res => res.json())
       .then(data => {
          console.log(data)
-         // setUser(data)
+         setUser(data)
       })
-      // create new user {}
-      // set user in state in App
       
+      history.push("/home")
    }
 
    return (
-      <div>
-         <form onSubmit={handleSubmit}>
-            <h1>Signup</h1>
-            <label>Username: </label>
+      <Wrapper>
+         <Form onSubmit={handleSubmit}>
+            <h1 align="center">Signup</h1>
+            <label for="username">Username: </label>
             <input
                type="text"
                name="username"
@@ -43,7 +47,7 @@ function Signup() {
                onChange={handleChange}
             />
             <br></br>
-            <label>Password: </label>
+            <label for="password">Password: </label>
             <input
                 type="text"
                 name="password"
@@ -51,7 +55,7 @@ function Signup() {
                 onChange={handleChange}
             />
             <br></br>
-            <label>Profile Image URL: </label>
+            <label for="profile_img">Profile Image URL: </label>
             <input
                type="text"
                name="profile_img"
@@ -60,9 +64,23 @@ function Signup() {
             />
             <br></br>
             <input type="submit" />
-         </form>
-      </div>
+         </Form>
+      </Wrapper>
    )
 };
 
 export default Signup;
+
+const Wrapper = styled.div`
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 50px;
+`
+
+const Form = styled.form`
+   padding: 20px;
+   border-style: double;
+   border-color: black;
+   border-radius: 10px;
+`

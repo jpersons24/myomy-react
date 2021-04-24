@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 
 function Login({ setUser }) {
@@ -10,6 +11,7 @@ function Login({ setUser }) {
       username: "",
       password: "",
    });
+   const [errors, setErrors] = useState([]);
 
    function handleChange(e) {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,22 +22,33 @@ function Login({ setUser }) {
 
       // POST /login
       fetch('http://localhost:4000/login', {
-         method: "POST"
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(formData),
       })
-         .then(res => res.json())
-         .then(user => {
-            // response -> user saved in state
-            console.log(user)
-            setUser(user)
-         })
-      history.push("/home")
+      .then((res) => {
+         return res.json().then(data => {
+            if (res.ok) {
+               return data
+            } else {
+               throw data
+            }
+         });
+      })
+      .then(user => {
+         setUser(user)
+         history.push("/home")
+      })
+      .catch(error => {
+         setErrors(error.errors)
+      })
    }
 
    return(
-      <div>
-         <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <label>Username: </label>
+      <Wrapper>
+         <Form onSubmit={handleSubmit}>
+            <h1 align="center">Login</h1>
+            <label for="username">Username: </label>
             <input
                type="text"
                name="username"
@@ -44,19 +57,40 @@ function Login({ setUser }) {
                onChange={handleChange}
             />
             <br></br>
-            <label>Password: </label>
+            <label for="password">Password: </label>
             <input
-               type="text"
+               type="password"
                name="password"
                autoComplete="off"
                value={formData.password}
                onChange={handleChange}
             />
             <br></br>
-            <input type="submit"/>
-         </form>
-      </div>
+            {errors.map((error) => (
+               <p style={{color: "red"}} key={error}>
+                  {error}
+               </p>
+            ))}
+            <input type="submit" />
+            <p style={{margin: "15px"}}>Don't have an account? Create one <Link to="/signup">here!</Link></p>
+         </Form>
+      </Wrapper>
    )
 }
 
-export default Login
+export default Login;
+
+
+const Wrapper = styled.div`
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 50px;
+`
+
+const Form = styled.form`
+   padding: 20px;
+   border-style: double;
+   border-color: black;
+   border-radius: 10px;
+`

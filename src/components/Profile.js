@@ -9,34 +9,35 @@ function Profile({ user, setUser }) {
    });
 
    function handleChange(e) {
-      setFormData({
-         ...formData,
-         [e.target.name]: e.target.value,
-      })
+      setFormData({ ...formData, [e.target.name]: e.target.value })
    }
 
    function handleSubmit(e) {
       e.preventDefault()
-      // update user's profile
+      
       // PATCH /me
-      fetch('http://localhost:4000/me', {
+      fetch(`http://localhost:4000/me/${user.id}`, {
          method: "PATCH",
          headers: {
             "Content-Type": "application/json",
          },
          body: JSON.stringify(formData)
       })
-         .then(res => res.json())
-         .then(data => {
-            setUser(data)
-         })
-      // send form data
-      // update the user object in state
+      .then(res => res.json())
+      .then(data => {
+         setUser(data)
+      })
+
+      setFormData({
+         username: user.username,
+         profile_img: "",
+      })
    }
 
 
    return (
       <div>
+         {user.profile_img ? <img src={user.profile_img} alt="Add a profile image!" /> : null}
          <h1>Update {user.username}'s Profile</h1>
          <div>
             <form onSubmit={handleSubmit}>
@@ -55,6 +56,7 @@ function Profile({ user, setUser }) {
                   value={formData.profile_img}
                   onChange={handleChange}
                />
+               <br></br>
                <input type="submit" />
             </form>
          </div>
