@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Button from 'react-bootstrap/Button';
 
 
 function Login({ setUser }) {
@@ -45,52 +45,42 @@ function Login({ setUser }) {
    }
 
    return(
-      <Wrapper>
-         <Form onSubmit={handleSubmit}>
-            <h1 align="center">Login</h1>
-            <label for="username">Username: </label>
-            <input
-               type="text"
-               name="username"
-               autoComplete="off"
-               value={formData.username}
-               onChange={handleChange}
-            />
-            <br></br>
-            <label for="password">Password: </label>
-            <input
-               type="password"
-               name="password"
-               autoComplete="off"
-               value={formData.password}
-               onChange={handleChange}
-            />
-            <br></br>
-            {errors.map((error) => (
-               <p style={{color: "red"}} key={error}>
-                  {error}
-               </p>
-            ))}
-            <input type="submit" />
-            <p style={{margin: "15px"}}>Don't have an account? Create one <Link to="/signup">here!</Link></p>
-         </Form>
-      </Wrapper>
+      <div className="login">
+         <div className="container">
+            <h1>Login</h1>
+            <form className="form" onSubmit={handleSubmit}>
+               <label for="username">Username: </label>
+               <input
+                  type="text"
+                  name="username"
+                  autoComplete="off"
+                  value={formData.username}
+                  onChange={handleChange}
+               />
+               <br></br>
+               <label for="password">Password: </label>
+               <input
+                  type="password"
+                  name="password"
+                  autoComplete="off"
+                  value={formData.password}
+                  onChange={handleChange}
+               />
+               <br></br>
+               {errors.map((error) => (
+                  <p style={{color: "red"}} key={error}>
+                     {error}
+                  </p>
+               ))}
+               <Button className="btn-login" as="input" type="submit" size="sm" />
+            </form>
+            <p>
+               Don't have an account? Create one <Link to="/signup">here!</Link>
+            </p>
+         </div>
+      </div>
    )
 }
 
 export default Login;
 
-
-const Wrapper = styled.div`
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   margin-top: 50px;
-`
-
-const Form = styled.form`
-   padding: 20px;
-   border-style: double;
-   border-color: black;
-   border-radius: 10px;
-`

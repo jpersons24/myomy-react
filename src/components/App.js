@@ -5,7 +5,7 @@ import { setWorkouts } from '../redux/workoutSlice';
 import { setExercises } from '../redux/exerciseSlice';
 import { setMeals } from '../redux/mealSlice';
 import { setFoods } from '../redux/foodSlice';
-import styled from 'styled-components';
+import '../App.css';
 import NavBar from './NavBar';
 import Login from './Login';
 import Signup from './Signup';
@@ -20,16 +20,6 @@ function App() {
 
   const [user, setUser] = useState(null)
   console.log("Current User", user)
-
-  // useEffect(() => {
-  //   // GET /me
-  //   fetch('http://localhost:4000/me')
-  //     .then(res => res.json())
-  //     .then(user => {
-  //       setUser(user)
-  //       history.push("/home")
-  //     })
-  // }, [history])
 
   useEffect(() => {
     // GET /workouts
@@ -76,7 +66,9 @@ function App() {
   }
 
   return (
-    <Wrapper>
+    // need another container
+    
+    <div className="app-wrapper">
       <NavBar user={user} userLogout={userLogout} />
       <Switch>
         <Route exact path="/login">
@@ -92,14 +84,10 @@ function App() {
           {user ? <Home user={user} /> : "You must log in to see this page!"}
         </Route>
       </Switch>
-    </Wrapper>
+    </div>
   )
 }
 
 export default App;
 
-const Wrapper = styled.div`
-  background-color: #9baaab;
-  height: 100%;
-  width: auto;
-`
+

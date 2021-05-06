@@ -14,7 +14,7 @@ function NavBar({ user, userLogout }) {
       <NavBarWrapper className="bg-info">
          <Container fluid>
             <Row sm="2">
-               <Col>
+               <Col className="nav-bar">
                   <NavTabs>
                      <LogoContainer>
                         <FontAwesomeIcon icon={faRunning} className="fa-2x" />
@@ -37,18 +37,20 @@ function NavBar({ user, userLogout }) {
                      </Link>
                   </NavTabs>
                </Col>
-               <Col>
-                  {user ? ( <Button variant="secondary" href="/login" onClick={userLogout}>Logout</Button> ) : (
+               <Col className="nav-bar">
                      <AccountControls>
-                        <Link to="/login" style={{ padding: "10px", color: "white" }}>
-                           Login
-                        </Link>
-                        <br></br>
-                        <Link to="/signup" style={{ padding: "10px", color: "white" }}>
-                           Signup
-                        </Link>
+                        {user ? ( <Button className="btn-logout" size="sm" href="/login" onClick={userLogout}>Logout</Button> ) : (
+                           <>
+                              <Link to="/login" style={{ padding: "10px", color: "white" }}>
+                                 Login
+                              </Link>
+                              <br></br>
+                              <Link to="/signup" style={{ padding: "10px", color: "white" }}>
+                                 Signup
+                              </Link>
+                           </>
+                        )}
                      </AccountControls> 
-                  )}
                </Col>
             </Row>
          </Container>

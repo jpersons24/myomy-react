@@ -1,0 +1,95 @@
+
+
+/* ********* COLOR VARIABLES ********* */
+
+:root {
+   --primary-light-grey: #f4f4f4;
+   --primary-teal: #34A2B8;
+   --primary-white: #ffffff;
+   --primary-dark-grey: #A7A9AD;
+}
+
+/* ********* NAVBAR ********* */
+
+.btn-logout {
+   color: var(--primary-teal) !important;
+   background: var(--primary-white) !important;
+   border: 1px solid var(--primary-dark-grey) !important;
+   margin: 0.5rem 0;
+}
+
+.btn-logout:hover {
+   color: var(--primary-white) !important;
+   background: var(--primary-dark-grey) !important;
+   border: 1px solid var(--primary-white) !important;
+   margin: 0.5rem 0;
+}
+
+
+/* ********* LOGIN ********* */
+
+.login{
+   display: flex;
+   justify-content: center;
+}
+
+.login .container {
+   display: inline-flexbox;
+   justify-content: center;
+   align-items: center;
+   margin: 4rem 3.5rem;
+   width: auto;
+   text-align: center;
+   background: var(--primary-light-grey);
+   border-radius: 10px;
+}
+
+.container {
+   padding: 1rem 3rem !important;
+}
+
+.container h1 {
+   text-transform: uppercase;
+   color: var(--primary-teal);
+}
+
+.container p {
+   color: var(--primary-teal);
+   margin: 0 0 1rem 0;
+}
+
+.form {
+   padding: 1.5rem 0;
+}
+
+.btn-login {
+   color: var(--primary-white) !important;
+   background: var(--primary-teal) !important;
+   border: 1px solid var(--primary-teal) !important;
+   margin: 0.5rem 0;
+}
+
+.btn-login:hover {
+   color: var(--primary-teal) !important;
+   background: var(--primary-white) !important;
+   border: 1px solid var(--primary-teal) !important;
+   margin: 0.5rem 0;
+}
+
+/* ********* SIGNUP ********* */
+
+.signup{
+   display: flex;
+   justify-content: center;
+}
+
+.signup .container {
+   display: inline-flexbox;
+   justify-content: center;
+   align-items: center;
+   margin: 4rem 3.5rem;
+   width: auto;
+   text-align: center;
+   background: var(--primary-light-grey);
+   border-radius: 10px;
+}

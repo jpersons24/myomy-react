@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import store from './redux/store.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = { store }>

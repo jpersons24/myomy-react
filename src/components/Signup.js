@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 function Signup({ setUser }) {
@@ -36,51 +36,43 @@ function Signup({ setUser }) {
    }
 
    return (
-      <Wrapper>
-         <Form onSubmit={handleSubmit}>
-            <h1 align="center">Signup</h1>
-            <label for="username">Username: </label>
-            <input
-               type="text"
-               name="username"
-               value={formData.username}
-               onChange={handleChange}
-            />
-            <br></br>
-            <label for="password">Password: </label>
-            <input
-                type="text"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-            />
-            <br></br>
-            <label for="profile_img">Profile Image URL: </label>
-            <input
-               type="text"
-               name="profile_img"
-               value={formData.profile_img}
-               onChange={handleChange}
-            />
-            <br></br>
-            <input type="submit" />
-         </Form>
-      </Wrapper>
+      <div className="signup">
+         <div className="container">
+            <h1>Signup</h1>
+            <form className="form" onSubmit={handleSubmit}>
+               <label for="username">Username: </label>
+               <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+               />
+               <br></br>
+               <label for="password">Password: </label>
+               <input
+                  type="text"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+               />
+               <br></br>
+               <label for="profile_img">Profile Image URL: </label>
+               <input
+                  type="text"
+                  name="profile_img"
+                  value={formData.profile_img}
+                  onChange={handleChange}
+               />
+               <br></br>
+               <Button className="btn-login" as="input" type="submit" size="sm" />
+            </form>
+            <p>
+               Already have an account? Login <Link to="/login">here!</Link>
+            </p>
+         </div>
+      </div>
    )
 };
 
 export default Signup;
 
-const Wrapper = styled.div`
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   margin-top: 50px;
-`
-
-const Form = styled.form`
-   padding: 20px;
-   border-style: double;
-   border-color: black;
-   border-radius: 10px;
-`
