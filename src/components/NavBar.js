@@ -1,76 +1,83 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRunning } from '@fortawesome/free-solid-svg-icons';
+
+
 
 function NavBar({ user, userLogout }) {
    return (
-      <Header>
-         <NavTabs>
-            <Link 
-               to="/home" 
-               style={{
-                  marginRight: "10px",
-                  paddingLeft: "5px"
-               }}
-            >
-               Home
-            </Link>
-            <br></br>
-            <Link 
-               to="/profile"
-               style={{
-                  marginRight: "10px",
-                  paddingLeft: "5px"
-            }}
-            >
-               Profile
-            </Link>
-         </NavTabs>
-         <AccountControls>
-            {user ? ( <button onClick={userLogout}>Logout</button> )
-            :
-            (
-               <>
-                  <Link 
-                     to="/login"
-                     style={{
-                        marginRight: "10px",
-                     }}
-                  >
-                     Login
-                  </Link>
-                  <br></br>
-                  <Link 
-                     to="/signup"
-                     style={{
-                        marginRight: "10px",
-                     }}
-                  >
-                     Signup
-                  </Link>
-               </>
-            )
-            }
-         </AccountControls>
-      </Header>
+      <NavBarWrapper className="bg-info">
+         <Container fluid>
+            <Row sm="2">
+               <Col>
+                  <NavTabs>
+                     <LogoContainer>
+                        <FontAwesomeIcon icon={faRunning} className="fa-2x" />
+                        <h4>MyoMy</h4>
+                     </LogoContainer>
+                     <Link to="/home" style={{ padding: "10px", color: "white" }}>
+                        Home
+                     </Link>
+                     <Link to="/profile" style={{ padding: "10px", color: "white"}}>
+                        Profile
+                     </Link>
+                     <Link style={{ padding: "10px", color: "white" }}>
+                        Workouts
+                     </Link>
+                     <Link style={{ padding: "10px", color: "white" }}>
+                        Meals
+                     </Link>
+                     <Link style={{ padding: "10px", color: "white" }}>
+                        Calendar
+                     </Link>
+                  </NavTabs>
+               </Col>
+               <Col>
+                  {user ? ( <Button variant="secondary" href="/login" onClick={userLogout}>Logout</Button> ) : (
+                     <AccountControls>
+                        <Link to="/login" style={{ padding: "10px", color: "white" }}>
+                           Login
+                        </Link>
+                        <br></br>
+                        <Link to="/signup" style={{ padding: "10px", color: "white" }}>
+                           Signup
+                        </Link>
+                     </AccountControls> 
+                  )}
+               </Col>
+            </Row>
+         </Container>
+      </NavBarWrapper>
    )
 }
 
 export default NavBar
 
-const Header = styled.header`
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
+const NavBarWrapper = styled.header`
+   width: auto;
+   padding: 1.5rem 3rem;
+   background: #d6cccb;
 `
 
 const NavTabs = styled.div`
    display: flex;
-   justify-content: space-around;
+   justify-content: flex-start;
    margin: 10px;
 `
 
 const AccountControls = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   margin: 10px;
+`
+
+const LogoContainer = styled.div`
+   margin: 0 35px 0 0;
+   text-align: center;
+   color: white;
 `

@@ -76,9 +76,8 @@ function App() {
   }
 
   return (
-    <div>
+    <Wrapper>
       <NavBar user={user} userLogout={userLogout} />
-      <Header>MYOMY</Header>
       <Switch>
         <Route exact path="/login">
           <Login setUser={setUser}/>
@@ -93,13 +92,14 @@ function App() {
           {user ? <Home user={user} /> : "You must log in to see this page!"}
         </Route>
       </Switch>
-    </div>
-  );
+    </Wrapper>
+  )
 }
 
 export default App;
 
-const Header = styled.h1`
-  display: flex;
-  justify-content: center;
+const Wrapper = styled.div`
+  background-color: #9baaab;
+  height: 100%;
+  width: auto;
 `
