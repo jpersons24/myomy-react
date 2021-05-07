@@ -125,16 +125,8 @@
    border: 1px solid var(--primary-white);
 }
 
-/* .container-home {
-   display: flex;
+.home-log {
+   display: block;
    justify-content: center;
-} */
-
-.container-home .row {
-   display: flex;
-   justify-content: center;
-}
-
-.container-home .row img {
-   display: inline-block;
+   align-items: center;
 }
