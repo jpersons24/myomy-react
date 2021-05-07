@@ -1,9 +1,15 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import Alert from 'react-bootstrap/Alert'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+// import Container from 'react-bootstrap/Container'
+// import Row from 'react-bootstrap/Row'
 import WorkoutLog from "./WorkoutLog";
 import MealLog from './MealLog';
 import WorkoutForm from './WorkoutForm';
 import MealForm from './MealForm';
+
+
 
 function Home({ user }) {
 
@@ -19,53 +25,49 @@ function Home({ user }) {
    }
    
    return (
-      <Wrapper>
-         <Container>
-            <Welcome>
-               <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px", marginRight: "10px"}} />
-               <h2>Welcome, {user.username}!</h2>
-            </Welcome>
-            <WorkoutForm user={user} />
-            <MealForm user={user} />
-            <div>
-               <button style={{width: "200px"}} onClick={handleWorkoutClick}>
-                  {!showWorkouts ? 'See your workouts' : 'Hide your workouts'}
-               </button>
-               <button style={{width: "200px"}} onClick={handleMealsClick}>
-                  {!showMeals ? 'See your meals' : 'Hide your meals'}
-               </button>
+      <div className="home">
+         {!user ?
+            <div className="container">
+               <Alert variant="danger">
+                  <Alert.Heading className="alert-heading">
+                     You must login or signup to use MyoMy!
+                  </Alert.Heading>
+                  <ButtonGroup className="btn-group" size="lg">
+                     <Button className="btn-alert" href="/login">Login</Button>
+                     <Button className="btn-alert" href="/signup">Signup</Button>
+                  </ButtonGroup>
+               </Alert>
             </div>
-         </Container>
-         <br></br>
-         <br></br>
-         <br></br>
+         :
+         <>
+            <div className="container-home" fluid>
+               <div className="row" md="1">
+                  <img src={user.profile_img} alt="Sorry nothing to display, edit your profile!" style={{height: "100px", marginRight: "10px"}} />
+                  <h2>Welcome, {user.username}!</h2>
+               </div>
+               <div>
+                  <WorkoutForm user={user} />
+                  <MealForm user={user} />
+               </div>
+               <div>
+                  <button style={{width: "200px"}} onClick={handleWorkoutClick}>
+                     {!showWorkouts ? 'See your workouts' : 'Hide your workouts'}
+                  </button>
+                  <button style={{width: "200px"}} onClick={handleMealsClick}>
+                     {!showMeals ? 'See your meals' : 'Hide your meals'}
+                  </button>
+               </div>
+            </div>
+         </>
+         }
          
          {!showWorkouts ? null :
          <WorkoutLog user={user} />}
          {!showMeals ? null :
          <MealLog user={user} />}
-      </Wrapper>
+      </div>
    )
 }
 
 export default Home;
 
-const Wrapper = styled.div`
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   padding: 20px;
-`
-
-const Welcome = styled.div`
-   display: flex;
-   flex-flow: flex-start wrap;
-   align-items: center;
-   margin: 40px;
-`
-
-const Container = styled.div`
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-`

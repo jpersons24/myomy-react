@@ -81,7 +81,7 @@ function App() {
           {user ? <Profile user={user} setUser={setUser} /> : "You must log in to see this page!"}
         </Route>
         <Route exact path="/home">
-          {user ? <Home user={user} /> : "You must log in to see this page!"}
+          <Home user={user} />
         </Route>
       </Switch>
     </div>

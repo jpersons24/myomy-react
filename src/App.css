@@ -93,3 +93,48 @@
    background: var(--primary-light-grey);
    border-radius: 10px;
 }
+
+
+/* ********* HOME ********* */
+
+.home .container {
+   display: flex;
+   justify-content: center;
+   margin-top: 5rem;
+}
+
+.home .alert-heading {
+   margin: 1rem;
+}
+
+.home .btn-group {
+   display: flex;
+   justify-content: center;
+   margin: 2rem;
+}
+
+.home .btn-group .btn-alert {
+   color: var(--primary-teal);
+   background: var(--primary-white);
+   border: 1px solid var(--primary-teal);
+}
+
+.home .btn-group .btn-alert:hover {
+   color: var(--primary-white);
+   background: var(--primary-teal);
+   border: 1px solid var(--primary-white);
+}
+
+/* .container-home {
+   display: flex;
+   justify-content: center;
+} */
+
+.container-home .row {
+   display: flex;
+   justify-content: center;
+}
+
+.container-home .row img {
+   display: inline-block;
+}
