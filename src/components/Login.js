@@ -37,7 +37,7 @@ function Login({ setUser }) {
       })
       .then(user => {
          setUser(user)
-         history.push("/home")
+         history.push("/profile")
       })
       .catch(error => {
          setErrors(error.errors)

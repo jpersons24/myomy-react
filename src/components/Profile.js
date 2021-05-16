@@ -7,6 +7,7 @@ function Profile({ user, setUser }) {
       username: user.username,
       profile_img: "",
    });
+   const [showEdit, setShowEdit] = useState(false);
 
    function handleChange(e) {
       setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -34,34 +35,54 @@ function Profile({ user, setUser }) {
       })
    }
 
+   
 
    return (
-      <div>
-         {user.profile_img ? <img src={user.profile_img} alt="Add a profile image!" /> : null}
-         <h1>Update {user.username}'s Profile</h1>
-         <div>
-            <form onSubmit={handleSubmit}>
-               <label>Username: </label>
-               <input 
-                  type="text"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-               />
-               <br></br>
-               <label>Profile Image: </label>
-               <input
-                  type="text"
-                  name="profile_img"
-                  value={formData.profile_img}
-                  onChange={handleChange}
-               />
-               <br></br>
-               <input type="submit" />
-            </form>
+     <div className="profile">
+       <div className="container">
+         <h1>{user.username}</h1>
+         <div className="row justify-content-between">
+           <div className="col-3-sm">
+             <p>
+               Height: {user.height_feet}'{user.height_inches}"
+             </p>
+           </div>
+           <div className="col-3-sm">
+             <p>Weight: {user.weight}</p>
+           </div>
+           <div className="col-3-sm">
+             <p>Age: {user.age}</p>
+           </div>
          </div>
-      </div>
-   )
+            
+         <button onClick={setShowEdit(() => !showEdit)}>Edit profile</button>
+               
+               
+
+         {/* <div>
+           <form onSubmit={handleSubmit}>
+             <label>Username: </label>
+             <input
+               type="text"
+               name="username"
+               value={formData.username}
+               onChange={handleChange}
+             />
+             <br></br>
+             <label>Profile Image: </label>
+             <input
+               type="text"
+               name="profile_img"
+               value={formData.profile_img}
+               onChange={handleChange}
+             />
+             <br></br>
+             <input type="submit" />
+           </form>
+         </div> */}
+       </div>
+     </div>
+   );
 }
 
 export default Profile

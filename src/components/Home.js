@@ -42,10 +42,9 @@ function Home({ user }) {
                   </ButtonGroup>
                </Alert>
             </div>
-         :
-         <>
-            
-         </>
+            :
+            null
+            // activity feed will go here (displaying other users activity, giving ability to leave post)
          }
          
          {!showWorkouts ? null :

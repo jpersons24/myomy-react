@@ -10,7 +10,6 @@ function Signup({ setUser }) {
    const [formData, setFormData] = useState({
       username: "",
       password: "",
-      profile_img: "",
    })
 
    function handleChange(e) {
@@ -32,7 +31,7 @@ function Signup({ setUser }) {
          setUser(data)
       })
       
-      history.push("/home")
+      history.push("/profile")
    }
 
    return (
@@ -50,17 +49,9 @@ function Signup({ setUser }) {
                <br></br>
                <label for="password">Password: </label>
                <input
-                  type="text"
+                  type="password"
                   name="password"
                   value={formData.password}
-                  onChange={handleChange}
-               />
-               <br></br>
-               <label for="profile_img">Profile Image URL: </label>
-               <input
-                  type="text"
-                  name="profile_img"
-                  value={formData.profile_img}
                   onChange={handleChange}
                />
                <br></br>

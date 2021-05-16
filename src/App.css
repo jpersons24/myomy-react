@@ -130,3 +130,9 @@
    justify-content: center;
    align-items: center;
 }
+
+/* ********* PROFILE ********* */
+
+.profile .container {
+   padding: 0;
+}
