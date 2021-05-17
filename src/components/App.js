@@ -1,6 +1,9 @@
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import Alert from "react-bootstrap/Alert";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
 import { setWorkouts } from '../redux/workoutSlice';
 import { setExercises } from '../redux/exerciseSlice';
 import { setMeals } from '../redux/mealSlice';
@@ -20,6 +23,31 @@ function App() {
 
   const [user, setUser] = useState(null)
   console.log("Current User", user)
+
+  useEffect(() => {
+    // set token using local storage
+    const token = localStorage.getItem("token")
+
+    // GET /me
+    fetch('http://localhost:4000/me', {
+      headers: { 
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((res) => {
+      return res.json().then((data) => {
+        if (res.ok) {
+          return data;
+        } else {
+          throw data;
+        }
+      });
+    })
+    .then((user) => {
+      // set user in state
+      setUser(user)
+    })
+  }, [])
 
   useEffect(() => {
     // GET /workouts
@@ -60,32 +88,27 @@ function App() {
     })
   }, [dispatch])
 
-  function userLogout() {
-    setUser(null)
-    history.push("/login")
-  }
-
   return (
     // need another container
-    
+
     <div className="app-wrapper">
-      <NavBar user={user} userLogout={userLogout} />
+      <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/login">
-          <Login setUser={setUser}/>
+          <Login setUser={setUser} />
         </Route>
         <Route exact path="/signup">
           <Signup setUser={setUser} />
         </Route>
         <Route exact path="/profile">
-          {user ? <Profile user={user} setUser={setUser} /> : "You must log in to see this page!"}
+          <Profile user={user} setUser={setUser} />
         </Route>
         <Route exact path="/home">
           <Home user={user} />
         </Route>
       </Switch>
     </div>
-  )
+  );
 }
 
 export default App;

@@ -11,6 +11,7 @@ function Signup({ setUser }) {
       username: "",
       password: "",
    })
+   const [errors, setErrors] = useState([]);
 
    function handleChange(e) {
       setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -27,11 +28,15 @@ function Signup({ setUser }) {
       })
       .then(res => res.json())
       .then(data => {
-         console.log(data)
-         setUser(data)
+         if (data.errors) {
+            setErrors(data.errors)
+         } else {
+            const { user, token } = data
+            localStorage.setItem("token", token)
+            setUser(user)
+            history.push("/profile")
+         }
       })
-      
-      history.push("/profile")
    }
 
    return (
@@ -56,6 +61,11 @@ function Signup({ setUser }) {
                />
                <br></br>
                <Button className="btn-login" as="input" type="submit" size="sm" />
+               {errors.length > 0 ?
+                  errors.map((error) => {
+                     return <p style={{ color: "red" }} key={error}>{error}</p>
+                  })
+               : null}
             </form>
             <p>
                Already have an account? Login <Link to="/login">here!</Link>

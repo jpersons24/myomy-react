@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,7 +9,19 @@ import { faRunning } from '@fortawesome/free-solid-svg-icons';
 
 
 
-function NavBar({ user, userLogout }) {
+function NavBar({ user, setUser}) {
+
+   const history = useHistory();
+
+   function userLogout() {
+      // remove token from local storage
+      localStorage.removeItem("token")
+      // clear user from state
+      setUser(null);
+      history.push("/login");
+   }
+
+
    return (
       <NavBarWrapper className="bg-info">
          <Container fluid>

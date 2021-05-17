@@ -30,29 +30,36 @@ function Home({ user }) {
    
    return (
       <div className="home">
-         {!user ?
+         {
+            !user ? (
             <div className="container">
+               <p>
+                  Welcome to Myomy, here you will be able to see daily activity of
+                  others, see what people are talking about and record your own
+                  exercise and nutrional activity.
+               </p>
                <Alert variant="danger">
                   <Alert.Heading className="alert-heading">
-                     You must login or signup to use MyoMy!
+                  You must login or signup to use MyoMy!
                   </Alert.Heading>
                   <ButtonGroup className="btn-group" size="lg">
-                     <Button className="btn-alert" href="/login">Login</Button>
-                     <Button className="btn-alert" href="/signup">Signup</Button>
+                  <Button className="btn-alert" href="/login">
+                     Login
+                  </Button>
+                  <Button className="btn-alert" href="/signup">
+                     Signup
+                  </Button>
                   </ButtonGroup>
                </Alert>
             </div>
-            :
-            null
+            ) : null
             // activity feed will go here (displaying other users activity, giving ability to leave post)
          }
-         
-         {!showWorkouts ? null :
-         <WorkoutLog user={user} />}
-         {!showMeals ? null :
-         <MealLog user={user} />}
+
+         {!showWorkouts ? null : <WorkoutLog user={user} />}
+         {!showMeals ? null : <MealLog user={user} />}
       </div>
-   )
+   );
 }
 
 export default Home;

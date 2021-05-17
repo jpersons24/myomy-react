@@ -133,6 +133,17 @@
 
 /* ********* PROFILE ********* */
 
+.profile {
+   display: flex;
+   justify-content: center;
+}
+
 .profile .container {
-   padding: 0;
+   margin: 2rem 0 !important;
+   border: 1px solid var(--primary-teal);
+}
+
+.container h3 {
+   text-transform: uppercase;
+   color: var(--primary-teal);
 }
